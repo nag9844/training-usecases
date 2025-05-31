@@ -1,5 +1,5 @@
 #!/bin/bash
-yum install -y nginx
+apt install -y nginx
 systemctl start nginx
 systemctl enable nginx
 mkdir -p /usr/share/nginx/html/images
