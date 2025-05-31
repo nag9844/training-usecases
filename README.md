@@ -18,7 +18,6 @@ The infrastructure includes:
 
 - [Terraform](https://www.terraform.io/downloads.html) (>= 1.2.0)
 - AWS CLI configured with appropriate credentials
-- Node.js (for npm scripts)
 
 ## Usage
 
@@ -27,26 +26,15 @@ The infrastructure includes:
    terraform init
    ```
 
-2. Preview the changes:
-   ```bash
-   npm run plan
-   ```
 
-3. Apply the configuration:
-   ```bash
-   npm run apply
-   ```
+2. Apply the configuration:
 
-4. Access the application:
+3. Access the application:
    After successful deployment, you'll get the ALB DNS name in the outputs. Use this URL to access:
    - Homepage: http://<alb_dns_name>/
    - Images: http://<alb_dns_name>/images
    - Registration: http://<alb_dns_name>/register
 
-5. To destroy the infrastructure:
-   ```bash
-   npm run destroy
-   ```
 
 ## Structure
 
