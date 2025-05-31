@@ -1,4 +1,4 @@
-name: Terraform AWS VPC & Nginx
+name: ALB with path based routing
 
 on:
   workflow_dispatch:
