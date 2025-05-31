@@ -3,7 +3,7 @@
 variable "region" {
   description = "AWS region to deploy resources"
   type        = string
-  default     = "us-east-1"
+  default     = "ap-south-1"
 }
 
 variable "vpc_cidr" {
@@ -15,7 +15,7 @@ variable "vpc_cidr" {
 variable "availability_zones" {
   description = "List of availability zones to use for the subnets"
   type        = list(string)
-  default     = ["us-east-1a", "us-east-1b", "us-east-1c"]
+  default     = ["ap-south-1a", "ap-south-1b", "ap-south-1c"]
 }
 
 variable "public_subnet_cidrs" {
@@ -33,7 +33,7 @@ variable "private_subnet_cidrs" {
 variable "project_tags" {
   description = "Tags to apply to all resources"
   type        = map(string)
-  default     = {
+  default = {
     Project     = "ALB-PathBasedRouting"
     Environment = "Development"
     Terraform   = "true"
