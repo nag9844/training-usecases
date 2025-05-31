@@ -17,7 +17,7 @@ variable "alb_sg_id" {
 
 variable "target_groups" {
   description = "Map of target groups to create"
-  type        = map(object({
+  type = map(object({
     name = string
     path = string
     port = number

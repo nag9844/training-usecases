@@ -22,7 +22,7 @@ variable "target_group_arns" {
 
 variable "instances" {
   description = "Map of instance configurations"
-  type        = map(object({
+  type = map(object({
     name         = string
     subnet_index = number
     user_data    = string

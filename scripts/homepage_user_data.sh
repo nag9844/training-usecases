@@ -1,16 +1,18 @@
 #!/bin/bash
 # User data script for homepage instance
 
-# Update system packages
-yum update -y
+# Wait for cloud-init to complete
+/usr/bin/cloud-init status --wait
 
-# Install and start nginx
-amazon-linux-extras install -y nginx1
-systemctl enable nginx
-systemctl start nginx
+# Update system packages
+apt-get update
+apt-get upgrade -y
+
+# Install nginx
+apt-get install -y nginx
 
 # Create custom index.html for homepage
-cat > /usr/share/nginx/html/index.html << 'EOT'
+cat > /var/www/html/index.html << 'EOT'
 <!DOCTYPE html>
 <html>
 <head>
@@ -78,14 +80,18 @@ cat > /usr/share/nginx/html/index.html << 'EOT'
 EOT
 
 # Configure nginx
-cat > /etc/nginx/conf.d/default.conf << 'EOT'
+cat > /etc/nginx/sites-available/default << 'EOT'
 server {
-    listen 80;
+    listen 80 default_server;
+    listen [::]:80 default_server;
+    
+    root /var/www/html;
+    index index.html;
+    
     server_name _;
     
     location / {
-        root /usr/share/nginx/html;
-        index index.html;
+        try_files $uri $uri/ =404;
     }
 }
 EOT

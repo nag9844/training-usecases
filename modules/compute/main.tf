@@ -1,13 +1,13 @@
 # Compute Module - Creates EC2 instances and registers them with target groups
 
-# Latest Amazon Linux 2 AMI
-data "aws_ami" "amazon_linux_2" {
+# Latest Ubuntu 22.04 LTS AMI
+data "aws_ami" "ubuntu" {
   most_recent = true
-  owners      = ["amazon"]
+  owners      = ["099720109477"] # Canonical
   
   filter {
     name   = "name"
-    values = ["amzn2-ami-hvm-*-x86_64-gp2"]
+    values = ["ubuntu/images/hvm-ssd/ubuntu-jammy-22.04-amd64-server-*"]
   }
   
   filter {
@@ -20,9 +20,9 @@ data "aws_ami" "amazon_linux_2" {
 resource "aws_instance" "app_instances" {
   for_each = var.instances
   
-  ami                    = data.aws_ami.amazon_linux_2.id
-  instance_type          = "t2.micro"
-  subnet_id              = var.private_subnets[each.value.subnet_index]
+  ami                    = data.aws_ami.ubuntu.id
+  instance_type          = "t3.micro"
+  subnet_id              = var.private_subnets[each.value.subnet_index % length(var.private_subnets)]
   vpc_security_group_ids = [var.instance_security_group]
   user_data              = each.value.user_data
   
