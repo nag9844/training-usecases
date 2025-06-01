@@ -127,7 +127,7 @@ module "compute" {
     }
     register = {
       name         = "register-instance"
-      subnet_index = 0
+      subnet_index = 2
       user_data    = <<-EOF
                      #!/bin/bash
                      apt-get update
